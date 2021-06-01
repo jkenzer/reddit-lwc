@@ -1,18 +1,12 @@
 <template>
-    <!-- LWC sample component <my-greeting> -->
-    <!-- <div class="center greeting"> -->
-    <!-- <my-greeting speed="slow"></my-greeting> -->
-    <!-- <my-greeting speed="medium"></my-greeting> -->
-    <!-- <my-greeting speed="fast"></my-greeting> -->
-    <!-- </div> -->
-    <!-- Page code -->
-    Subreddit Name: <input onchange={updateSubReddit} value={subRedditName} />
+    <my-header sub-reddit-name={subRedditName} onupdatereddit={handleRedditUpdate}></my-header>
     <template if:true={hasData}>
-        <div class="center slds-m-around_small" style="width:80%;">
+        <div class="center slds-m-around_small" style="width:60%;">
             <lightning-datatable
                 data={subRedditData}
                 columns={columns}
                 key-field="url"
+                column-widths-mode="auto"
                 hide-checkbox-column>
             </lightning-datatable>
         </div>

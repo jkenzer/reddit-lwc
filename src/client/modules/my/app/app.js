@@ -6,21 +6,27 @@ export default class App extends LightningElement {
     subRedditData = [];
     columns = [
         {
-            label: 'URL',
+            label: 'Score',
+            fieldName: 'score',
+            type: 'number',
+            hideDefaultActions: true
+        },
+        {
+            label: 'Post',
             fieldName: 'url',
             type: 'url',
             hideDefaultActions: true,
-            typeAttributes: { label: { fieldName: 'title' } }
-        },
-        {
-            label: 'Title',
-            fieldName: 'title',
-            type: 'text',
-            hideDefaultActions: true
+            typeAttributes: {
+                label: {
+                    fieldName: 'title'
+                },
+                target: '_blank'
+            }
         }
     ];
-    updateSubReddit(event) {
-        this.subRedditName = event.target.value;
+
+    handleRedditUpdate(event) {
+        this.subRedditName = event.detail.reddit;
     }
 
     get hasData() {
@@ -36,6 +42,7 @@ export default class App extends LightningElement {
     @wire(subRedditWire, { subRedditName: '$subRedditName' })
     wiredSubredditData({ error, data }) {
         if (!error && data) {
+            console.log(data);
             this.subRedditData = data.map((post) => ({
                 ...post,
                 title: this.decodeHtml(post.title)
