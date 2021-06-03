@@ -4,6 +4,7 @@
     "author": "jkenzer",
     "bugs": "https://github.com/jkenzer/reddit-lwc/issues",
     "dependencies": {
+        "@lwc/synthetic-shadow": "^2.1.0",
         "@salesforce-ux/design-system": "^2.15.8",
         "compression": "^1.7.4",
         "express": "^4.17.1",

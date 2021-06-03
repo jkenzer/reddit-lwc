@@ -1,13 +1,14 @@
 <template>
     <my-header sub-reddit-name={subRedditName} onupdatereddit={handleRedditUpdate}></my-header>
     <template if:true={hasData}>
-        <div class="center slds-m-around_small" style="width:60%;">
+        <div class="center slds-m-around_small">
             <lightning-datatable
+                key-field="url"
                 data={subRedditData}
                 columns={columns}
-                key-field="url"
+                onrowaction={handleRowAction}
                 column-widths-mode="auto"
-                hide-checkbox-column>
+                hide-checkbox-column="true">
             </lightning-datatable>
         </div>
     </template>

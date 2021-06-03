@@ -1,51 +1,70 @@
 import { LightningElement, wire } from 'lwc';
 import subRedditWire from 'data/subRedditWire';
 
+const columns = [
+    {
+        type: 'button',
+        typeAttributes: {
+            label: 'First Button',
+            name: 'first_button',
+            variant: 'base'
+        }
+    },
+    {
+        label: 'Score',
+        fieldName: 'score',
+        type: 'number',
+        hideDefaultActions: true
+    },
+    {
+        label: 'Post',
+        fieldName: 'url',
+        type: 'url',
+        hideDefaultActions: true,
+        typeAttributes: {
+            label: {
+                fieldName: 'title'
+            },
+            target: '_blank'
+        }
+    },
+    {
+        type: 'button-icon',
+        typeAttributes: {
+            iconName: 'utility:download',
+            label: 'Download',
+            name: 'download',
+            variant: 'bare',
+            alternativeText: 'download',
+            disabled: false
+        }
+    }
+];
+
 export default class App extends LightningElement {
+    columns = columns;
     subRedditName = 'formula1';
     subRedditData = [];
-    columns = [
-        {
-            label: 'Score',
-            fieldName: 'score',
-            type: 'number',
-            hideDefaultActions: true
-        },
-        {
-            label: 'Post',
-            fieldName: 'url',
-            type: 'url',
-            hideDefaultActions: true,
-            typeAttributes: {
-                label: {
-                    fieldName: 'title'
-                },
-                target: '_blank'
-            }
-        }
-    ];
 
     handleRedditUpdate(event) {
         this.subRedditName = event.detail.reddit;
+    }
+
+    handleRowActions(event) {
+        const actionName = event.detail.action.name;
+        const row = event.detail.row;
+        console.log(actionName, row);
     }
 
     get hasData() {
         return this.subRedditData;
     }
 
-    decodeHtml(html) {
-        let span = document.createElement('span');
-        span.innerHTML = html;
-        return span.innerText;
-    }
-
     @wire(subRedditWire, { subRedditName: '$subRedditName' })
     wiredSubredditData({ error, data }) {
         if (!error && data) {
-            console.log(data);
             this.subRedditData = data.map((post) => ({
-                ...post,
-                title: this.decodeHtml(post.title)
+                ...post
             }));
         } else if (error) {
             console.error(error);
