@@ -50,7 +50,7 @@ export default class App extends LightningElement {
         this.subRedditName = event.detail.reddit;
     }
 
-    handleRowActions(event) {
+    handleRowAction(event) {
         const actionName = event.detail.action.name;
         const row = event.detail.row;
         console.log(actionName, row);
