@@ -3,14 +3,6 @@ import subRedditWire from 'data/subRedditWire';
 
 const columns = [
     {
-        type: 'button',
-        typeAttributes: {
-            label: 'First Button',
-            name: 'first_button',
-            variant: 'base'
-        }
-    },
-    {
         label: 'Score',
         fieldName: 'score',
         type: 'number',
@@ -36,7 +28,7 @@ const columns = [
             name: 'download',
             variant: 'bare',
             alternativeText: 'download',
-            disabled: false
+            disabled: { fieldName: 'mediaDisabled' }
         }
     }
 ];
@@ -53,7 +45,14 @@ export default class App extends LightningElement {
     handleRowAction(event) {
         const actionName = event.detail.action.name;
         const row = event.detail.row;
-        console.log(actionName, row);
+        console.log(
+            actionName,
+            encodeURI(
+                row.preview.images[0].resolutions[
+                    row.preview.images[0].resolutions.length - 1
+                ].url
+            )
+        );
     }
 
     get hasData() {
@@ -64,7 +63,8 @@ export default class App extends LightningElement {
     wiredSubredditData({ error, data }) {
         if (!error && data) {
             this.subRedditData = data.map((post) => ({
-                ...post
+                ...post,
+                mediaDisabled: !post.preview?.enabled
             }));
         } else if (error) {
             console.error(error);
