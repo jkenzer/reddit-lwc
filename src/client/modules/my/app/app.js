@@ -37,22 +37,18 @@ export default class App extends LightningElement {
     columns = columns;
     subRedditName = 'formula1';
     subRedditData = [];
+    mediaURL = '';
 
     handleRedditUpdate(event) {
         this.subRedditName = event.detail.reddit;
+        this.mediaURL = '';
     }
 
     handleRowAction(event) {
-        const actionName = event.detail.action.name;
         const row = event.detail.row;
-        console.log(
-            actionName,
-            encodeURI(
-                row.preview.images[0].resolutions[
-                    row.preview.images[0].resolutions.length - 1
-                ].url
-            )
-        );
+        this.mediaURL = row.preview.images[0].resolutions[
+            row.preview.images[0].resolutions.length - 1
+        ].url.replaceAll('&amp;', '&');
     }
 
     get hasData() {

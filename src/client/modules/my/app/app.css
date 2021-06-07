@@ -33,6 +33,12 @@ img {
     max-width: 150px;
 }
 
-.greeting {
-    height: 75px;
+.app-container {
+    display: flex;
+}
+.list-view {
+    flex-grow: 1;
+}
+.media-viewer {
+    flex-basis: 40%;
 }
