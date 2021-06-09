@@ -13,6 +13,7 @@ const columns = [
         fieldName: 'url',
         type: 'url',
         hideDefaultActions: true,
+        wrapText: true,
         typeAttributes: {
             label: {
                 fieldName: 'title'
@@ -37,7 +38,7 @@ export default class App extends LightningElement {
     columns = columns;
     subRedditName = 'formula1';
     subRedditData = [];
-    mediaURL = '';
+    media = '';
 
     handleRedditUpdate(event) {
         this.subRedditName = event.detail.reddit;
@@ -46,9 +47,7 @@ export default class App extends LightningElement {
 
     handleRowAction(event) {
         const row = event.detail.row;
-        this.mediaURL = row.preview.images[0].resolutions[
-            row.preview.images[0].resolutions.length - 1
-        ].url.replaceAll('&amp;', '&');
+        this.media = row;
     }
 
     get hasData() {
@@ -60,7 +59,8 @@ export default class App extends LightningElement {
         if (!error && data) {
             this.subRedditData = data.map((post) => ({
                 ...post,
-                mediaDisabled: !post.preview?.enabled
+                mediaDisabled: !post.media && !post.preview?.enabled
+                // mediaDisabled: !post.preview?.enabled
             }));
         } else if (error) {
             console.error(error);

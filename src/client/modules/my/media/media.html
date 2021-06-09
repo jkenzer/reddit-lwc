@@ -1,5 +1,7 @@
 <template>
-  <div if:true={hasMedia} class="slds-m-around_small">
-    <img src={mediaUrl} />
+  <div if:true={hasImageMedia} class="slds-m-around_small">
+    <img src={mediaURL} />
+  </div>
+  <div if:true={hasEmbedMedia} class="embeddedDiv slds-m-around_small" lwc:dom="manual">
   </div>
 </template>

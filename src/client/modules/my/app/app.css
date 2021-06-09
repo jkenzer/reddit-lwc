@@ -37,8 +37,8 @@ img {
     display: flex;
 }
 .list-view {
-    flex-grow: 1;
+    width: 60%;
 }
 .media-viewer {
-    flex-basis: 40%;
+    width: 40%;
 }
