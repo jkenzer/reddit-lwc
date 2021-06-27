@@ -6,6 +6,7 @@ Using a custom wire adapter based on [subrajp's repo](https://github.com/surajp/
 
 ## Todo
 
+-   [ ] Set default sub-reddit in ENV var
 -   [ ] Add pagination
 
 ## How to start?
