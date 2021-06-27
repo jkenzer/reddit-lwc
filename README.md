@@ -1,8 +1,16 @@
-# reddit-lwc
+# Reddit Client using the Lightning Web Components Open Source
 
-Using lighting base components with LWC OSS to create a reddit client. Based on the wire adapter found here: https://github.com/surajp/lwc-oss-wire
+Using [lighting base components](https://www.npmjs.com/package/lightning-base-components) with [LWC OSS](https://lwc.dev/) to create a reddit client. This is just to stay familiar with and see what can be done with LWC OSS.
+
+Using a custom wire adapter based on [subrajp's repo](https://github.com/surajp/lwc-oss-wire)
+
+## Todo
+
+-   [ ] Add pagination
 
 ## How to start?
+
+Clone
 
 Start simple by running `yarn watch` (or `npm run watch`, if you set up the project with `npm`). This will start the project with a local development server.
 
